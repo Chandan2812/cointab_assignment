@@ -12,6 +12,7 @@ This project is a simple 2-page website built using Node.js and MongoDB. It allo
 ## Deployed link
 
 - Backend - https://cointab-mxqr.onrender.com/
+- Frontend - https://lighthearted-selkie-35dd7c.netlify.app/
 
 ## Features
 
