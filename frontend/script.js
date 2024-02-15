@@ -2,7 +2,7 @@ const usersContainer = document.getElementById('users-container');
 const allUsersBtn = document.getElementById('all-users-btn');
 
 allUsersBtn.addEventListener('click', () => {
-    fetch('http://localhost:8000/users/all')
+    fetch('https://cointab-mxqr.onrender.com/users/all')
         .then(response => response.json())
         .then(users => {
             // Create table element
@@ -66,7 +66,7 @@ document.addEventListener('click', (event) => {
 
         console.log('Add button clicked for userId:', userId);
 
-        fetch('http://localhost:8000/users/add', {
+        fetch('https://cointab-mxqr.onrender.com/users/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

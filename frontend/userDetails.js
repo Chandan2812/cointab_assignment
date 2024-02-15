@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to fetch user details
     async function fetchUserDetails(userId) {
         try {
-            const response = await fetch(`http://localhost:8000/users/${userId}`);
+            const response = await fetch(`https://cointab-mxqr.onrender.com/users/${userId}`);
             if (!response.ok) {
                 throw new Error('Failed to fetch user details');
             }
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to fetch user's posts
     async function fetchUserPosts(userId) {
         try {
-            const response = await fetch(`http://localhost:8000/posts/${userId}`);
+            const response = await fetch(`https://cointab-mxqr.onrender.com/posts/${userId}`);
             if (!response.ok) {
                 throw new Error('Failed to fetch user posts');
             }
@@ -74,14 +74,14 @@ document.getElementById('bulk-add-btn').addEventListener('click', async () => {
         const userId = urlParams.get('userId');
 
         // Fetch user information for the current userId
-        const userDataResponse = await fetch(`http://localhost:8000/users/${userId}`);
+        const userDataResponse = await fetch(`https://cointab-mxqr.onrender.com/users/${userId}`);
         if (!userDataResponse.ok) {
             throw new Error('Failed to fetch user data');
         }
         const userData = await userDataResponse.json();
 
         // Fetch posts for the current userId
-        const postsResponse = await fetch(`http://localhost:8000/posts/${userId}`);
+        const postsResponse = await fetch(`https://cointab-mxqr.onrender.com/posts/${userId}`);
         if (!postsResponse.ok) {
             throw new Error('Failed to fetch posts');
         }
@@ -94,7 +94,7 @@ document.getElementById('bulk-add-btn').addEventListener('click', async () => {
         };
 
         // Send bulk add request to backend
-        const response = await fetch('http://localhost:8000/posts/bulk-add', {
+        const response = await fetch('https://cointab-mxqr.onrender.com/posts/bulk-add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -123,7 +123,7 @@ document.getElementById('download-excel-btn').addEventListener('click', async ()
         const userId = urlParams.get('userId');
         
         // Trigger the download by navigating to the download endpoint
-        window.location.href = `http://localhost:8000/posts/download-excel/${userId}`;
+        window.location.href = `https://cointab-mxqr.onrender.com/posts/download-excel/${userId}`;
     } catch (error) {
         console.error('Error downloading Excel file:', error);
         alert('Failed to download Excel file');
