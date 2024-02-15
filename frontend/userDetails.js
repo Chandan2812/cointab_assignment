@@ -3,20 +3,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const userId = urlParams.get('userId');
 
-    // // Function to fetch user details
-    // async function fetchUserDetails(userId) {
-    //     try {
-    //         const response = await fetch(`http://localhost:8000/users/${userId}`);
-    //         if (!response.ok) {
-    //             throw new Error('Failed to fetch user details');
-    //         }
-    //         const userData = await response.json();
-    //         displayUserDetails(userData);
-    //     } catch (error) {
-    //         console.error('Error fetching user details:', error);
-    //         alert('Failed to fetch user details');
-    //     }
-    // }
+    // Function to fetch user details
+    async function fetchUserDetails(userId) {
+        try {
+            const response = await fetch(`http://localhost:8000/users/${userId}`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch user details');
+            }
+            const userData = await response.json();
+            displayUserDetails(userData);
+        } catch (error) {
+            console.error('Error fetching user details:', error);
+            alert('Failed to fetch user details');
+        }
+    }
 
     // Function to display user details on the page
     function displayUserDetails(userData) {
@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <p><strong>Email:</strong> ${userData.email}</p>
             <p><strong>Phone:</strong> ${userData.phone}</p>
             <p><strong>Website:</strong> ${userData.website}</p>
-            <p><strong>City:</strong> ${userData.address.city}</p>
-            <p><strong>Company:</strong> ${userData.company.name}</p>
+            <p><strong>City:</strong> ${userData.city}</p>
+            <p><strong>Company:</strong> ${userData.company}</p>
         `;
     }
 
@@ -59,30 +59,73 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Fetch user details and posts when the page loads
-    // fetchUserDetails(userId);
+    fetchUserDetails(userId);
     fetchUserPosts(userId);
 });
 
 
 
 
+
 document.getElementById('bulk-add-btn').addEventListener('click', async () => {
     try {
+        // Get userId from URL query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const userId = urlParams.get('userId');
+
+        // Fetch user information for the current userId
+        const userDataResponse = await fetch(`http://localhost:8000/users/${userId}`);
+        if (!userDataResponse.ok) {
+            throw new Error('Failed to fetch user data');
+        }
+        const userData = await userDataResponse.json();
+
+        // Fetch posts for the current userId
+        const postsResponse = await fetch(`http://localhost:8000/posts/${userId}`);
+        if (!postsResponse.ok) {
+            throw new Error('Failed to fetch posts');
+        }
+        const userPosts = await postsResponse.json();
+
+        // Combine user data and posts
+        const postData = {
+            user: userData,
+            posts: userPosts
+        };
+
+        // Send bulk add request to backend
         const response = await fetch('http://localhost:8000/posts/bulk-add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ userId: userId })
+            body: JSON.stringify(postData)
         });
         if (!response.ok) {
-            throw new Error('Failed to bulk add posts');
+            throw new Error('Failed to bulk add data');
         }
+        alert("Data added successfully");
         // Show Download in Excel button and hide Bulk Add button
         document.getElementById('download-excel-btn').style.display = 'inline-block';
         document.getElementById('bulk-add-btn').style.display = 'none';
     } catch (error) {
-        console.error('Error bulk adding posts:', error);
-        alert('Failed to bulk add posts: ' + error.message);
+        console.error('Error bulk adding data:', error);
+        alert('Failed to bulk add data: ' + error.message);
+    }
+});
+
+
+
+document.getElementById('download-excel-btn').addEventListener('click', async () => {
+    try {
+        // Get userId from URL query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const userId = urlParams.get('userId');
+        
+        // Trigger the download by navigating to the download endpoint
+        window.location.href = `http://localhost:8000/posts/download-excel/${userId}`;
+    } catch (error) {
+        console.error('Error downloading Excel file:', error);
+        alert('Failed to download Excel file');
     }
 });

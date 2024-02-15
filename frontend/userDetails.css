@@ -1,0 +1,84 @@
+/* Resetting default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+
+/* Main container styles */
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Button styles */
+button {
+    padding: 12px 24px;
+    margin-top: 10px;
+    margin-right: 10px;
+    background-color: #637c63;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #388e3c;
+}
+
+/* User details container styles */
+#user-details-container {
+    margin-bottom: 20px;
+}
+
+/* Post container styles */
+#posts-container {
+    margin-bottom: 20px;
+}
+
+/* User details paragraph styles */
+#user-details-container p {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+/* User posts list styles */
+#posts-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#posts-container li {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+}
+
+#posts-container li:last-child {
+    border-bottom: none;
+}
+
+#posts-container li strong {
+    color: #333;
+    font-weight: 700;
+}
+
+/* Button container styles */
+div {
+    text-align: center;
+    margin-bottom: 20px;
+}

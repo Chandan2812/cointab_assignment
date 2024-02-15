@@ -72,7 +72,7 @@ document.addEventListener('click', (event) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ 
-                userId: userId,
+                id: userId,
                 name: name,
                 email: email,
                 phone: phone,
@@ -112,4 +112,3 @@ document.addEventListener('click', (event) => {
         window.location.href = `userDetails.html?userId=${userId}`;
     }
 });
-
